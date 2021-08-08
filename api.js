@@ -39,7 +39,7 @@ app.get('/resetAnime',(req,res) => {
     }) 
 })
 
-app.get('resetAnimeGenre', (req,res) => {
+app.get('/resetAnimeGenre', (req,res) => {
   const query = "DROP TABLE IF EXISTS Anime_Genre;"
   "CREATE TABLE Anime_Genre (row_id INT AUTO_INCREMENT PRIMARY KEY, anime_id INT, genre_id INT);" +
     "LOAD DATA LOCAL INFILE 'csv/animeGenreTable.csv' INTO TABLE Anime_Genre FIELDS TERMINATED BY ',' IGNORE 1 LINES (anime_id, genre_id);"
