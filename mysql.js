@@ -62,7 +62,27 @@ db.connect((err) => {
 
   query = "CREATE TABLE USER_REVIEW (user_id INT, review VARCHAR(255))"
   executeQuery(query, "User_Review Table Created\n")
+
   // load table statements
+  
+  query = "LOAD DATA LOCAL INFILE 'csv/genresTable.csv' INTO TABLE GENRES FIELDS TERMINATED BY ',' IGNORE 1 LINES"
+  executeQuery(query, "Genres Table Loaded")
+
+  query = "LOAD DATA LOCAL INFILE 'csv/animeGenreTable.csv' INTO TABLE ANIME_GENRE FIELDS TERMINATED BY ','"
+    + "IGNORE 1 LINES (anime_id, genre_id)"
+  executeQuery(query, "Anime_Genres Table Loaded")
+
+  query = "LOAD DATA LOCAL INFILE 'csv/reviewsTable.csv' INTO TABLE REVIEWS FIELDS TERMINATED BY ',' "
+    + "IGNORE 1 LINES (review, anime_id, user_id, date_time)"
+    executeQuery(query, "Reviews Table Loaded")
+
+  query = "LOAD DATA LOCAL INFILE 'csv/usersTable.csv' INTO TABLE USERS FIELDS TERMINATED BY ',' IGNORE 1 LINES "
+    + "(user_id, first_name, last_name, email, gender, username, password, avatar_image, hex_color)"
+    executeQuery(query, "Users Table Loaded")
+
+  query = "LOAD DATA LOCAL INFILE 'csv/userReviewTable.csv' INTO TABLE USER_REVIEW FIELDS TERMINATED BY ',' IGNORE 1 LINES "
+    + "(user_id, review)"
+    executeQuery(query, "User_Review Table Loaded\n")
   db.end( err => {
     // closing connection to mysql DB
     if (err) throw err
