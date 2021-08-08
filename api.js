@@ -15,7 +15,7 @@ const db = mysql.createConnection({ // connected to mySQL DB
 })
 app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json)
+app.use(bodyParser.json())
 
 function executeQuery(query,res){ // reusable function that runs sql queries
   db.query(query, (err,rows) =>{
@@ -74,24 +74,24 @@ app.get('/resetUserReviews',(req,res) => {
   executeQuery(query,res)
 })
 
-app.get('./allGenres', (req,res) => {
+app.get('/allGenres', (req,res) => {
   const query = "SELECT * FROM GENRES WHERE ID != 1"
   executeQuery(query,res)
 })
 
-app.get('./largestAnimeId',(req,res) => {
+app.get('/largestAnimeId',(req,res) => {
   const query = "SELECT MAX(anime_id) AS largest_anime_id FROM Anime"
   executeQuery(query,res)
 })
 
 app.post('/addAnime/:name/:animeId/:type/:episodes/:rating/:members/:genres', (req,res) =>{
   
-  const insertAnime = `INSERT INTO Anime (name, anime_id, type, episodes, ratings, members)
-    VALUES ('${req.body.name}','${req.body.animeId}','${req.body.type}',
+  const insertAnime = `INSERT INTO Anime (name, anime_id, type, episodes, rating, members)
+    VALUES ('${req.body.name}',${req.body.animeId},'${req.body.type}',
     ${req.body.episodes},${req.body.rating}, ${req.body.members})`
 
   const insertAnimeGenres = Object.keys(req.body.genres).map(key =>{
-    const id = req.body.genres[keys]
+    const id = req.body.genres[key]
     return `INSERT INTO Anime_Genre (anime_id, genre_id) VALUES '${req.body.animeId}',${id}`
   })
 
