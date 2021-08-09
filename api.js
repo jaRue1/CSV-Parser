@@ -86,13 +86,13 @@ app.get('/largestAnimeId',(req,res) => {
 
 app.post('/addAnime/:name/:animeId/:type/:episodes/:rating/:members/:genres', (req,res) =>{
   
-  const insertAnime = `INSERT INTO Anime (name, anime_id, type, episodes, rating, members)
+  const insertAnime = `INSERT INTO ANIME (name, anime_id, type, episodes, rating, members)
     VALUES ('${req.body.name}',${req.body.animeId},'${req.body.type}',
     ${req.body.episodes},${req.body.rating}, ${req.body.members})`
 
   const insertAnimeGenres = Object.keys(req.body.genres).map(key =>{
     const id = req.body.genres[key]
-    return `INSERT INTO Anime_Genre (anime_id, genre_id) VALUES '${req.body.animeId}',${id}`
+    return `INSERT INTO ANIME_GENRE (anime_id, genre_id) VALUES ('${req.body.animeId}', ${id})`
   })
 
   const queries = [insertAnime, ...insertAnimeGenres]
