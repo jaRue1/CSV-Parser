@@ -109,6 +109,7 @@ function executeQuery(query, msg) {
 
 /// if you get this error
 // Loading local data is disabled; this must be enabled on both the client and server sides”
+
 // access your db from the termnial and run this cmd
 
 // set global local_infile=true;
